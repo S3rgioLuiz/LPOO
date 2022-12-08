@@ -2,6 +2,8 @@ package controller;
 
 import model.Aluno;
 
+import java.util.*;
+
 public class AlunoController {
     public static void main(String[] args) {
         // ---------------- TÓPICO A ----------------
@@ -29,5 +31,29 @@ public class AlunoController {
         System.out.println(aluno2.getId()); System.out.println(aluno2.getNome());
         System.out.println(aluno2.getSobrenome()); System.out.println(aluno2.getCpf());
         System.out.println(aluno2.getEmail());
+
+        System.out.println("\n--------- Tópico 2 ---------");
+        System.out.println("\n--------- Ordem Crescente List ---------");
+        List<Aluno> alunoList = new ArrayList<>();
+        alunoList.add(aluno1); alunoList.add(aluno2); alunoList.add(aluno3);
+        alunoList.add(aluno4); alunoList.add(aluno5); alunoList.add(aluno6);
+        alunoList.sort(Comparator.comparing(Aluno::getId));
+        System.out.println(alunoList);
+
+        System.out.println("\n--------- Tipo <Map> ---------");
+        Map<Integer, Aluno> alunoMap = new HashMap<>();
+        alunoMap.put(aluno1.getId(), aluno1);  alunoMap.put(aluno2.getId(), aluno2);
+        alunoMap.put(aluno3.getId(), aluno3);  alunoMap.put(aluno4.getId(), aluno4);
+        alunoMap.put(aluno5.getId(), aluno5);  alunoMap.put(aluno6.getId(), aluno6);
+        System.out.println(alunoMap);
+
+        System.out.println("\n--------- Ordem Decrescente List ---------");
+        alunoList.sort(Comparator.comparing(Aluno::getId).reversed());
+        System.out.println(alunoList);
+
+        System.out.println("\n--------- Pesquisa ID 5 List/Map ---------");
+        Aluno encontrei = alunoList.stream().filter(p -> p.getId() == 5).findAny().orElse(null);
+        System.out.println(encontrei);
+        System.out.println(alunoMap.get(5));
     }
 }
